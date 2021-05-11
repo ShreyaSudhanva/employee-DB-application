@@ -1,0 +1,65 @@
+<%- include("partials/header") %>
+<% function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+} %> 
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <h3 style="text-align: center;margin-top: 2rem;margin-bottom: 2rem;">Employee Details</h3>
+            <table style="text-align: center;margin-top: 2rem;">
+                <tr style="border-bottom: 1px solid rgba(71, 71, 71, 0.726);">
+                    <th style="padding-right: 2rem;">First Name</th>
+                    <th style="padding-right: 2rem;">Middle Name</th>
+                    <th style="padding-right: 2rem;">Last Name</th>
+                    <th style="padding-right: 2rem;">Birth Date</th>
+                    <th style="padding-right: 2rem;">Address</th>
+                    <th style="padding-right: 2rem;">Sex</th>
+                    <th style="padding-right: 2rem;">Department Number</th>
+                </tr>
+                    <tr>
+                        <td style="padding-right: 2rem;"><%=empdata[0].fname %></td>
+                        <td style="padding-right: 2rem;"><%=empdata[0].minit %></td>
+                        <td style="padding-right: 2rem;"><%=empdata[0].lname %></td>
+                        <td style="padding-right: 2rem;"><%=formatDate(empdata[0].bdate) %></td>
+                        <td style="padding-right: 2rem;"><%=empdata[0].address %></td>
+                        <td style="padding-right: 2rem;"><%=empdata[0].sex %></td>
+                        <td style="padding-right: 2rem;"><%=empdata[0].dno %></td>
+                    </tr>
+            </table>
+            <br>
+            <hr style="width: 400px;
+			border-top: 1px solid #f8f8f8;
+			border-bottom: 1px solid rgba(0,0,0,0.5);">
+            <h3 style="text-align: center;margin-top: 2rem;margin-bottom: 2rem;">Salary Details</h3>
+            <table style="text-align: center;margin-top: 2rem;">
+                <tr style="border-bottom: 1px solid rgba(71, 71, 71, 0.726);">
+                    <th style="padding-right: 2rem;">Transaction ID</th>
+                    <th style="padding-right: 2rem;">Monthly Salary</th>
+                    <th style="padding-right: 2rem;">Gross Salary</th>
+                    <th style="padding-right: 2rem;">Salary Month</th>
+                    <th style="padding-right: 2rem;">Salary Year</th>
+                    <th style="padding-right: 2rem;">Recieved Date</th>
+                </tr>
+                <% for(var i=0;i<saldata.length;i++){ %> 
+                    <tr style="border-bottom: 1px solid rgba(71, 71, 71, 0.726);">
+                        <td style="padding-right: 2rem;"><%=saldata[i].transaction_id %></td>
+                        <td style="padding-right: 2rem;"><%=saldata[i].emp_net_salary %></td>
+                        <td style="padding-right: 2rem;"><%=saldata[i].emp_gross %></td>
+                        <td style="padding-right: 2rem;"><%=saldata[i].emp_salary_month %></td>
+                        <td style="padding-right: 2rem;"><%=saldata[i].emp_salary_year %></td>
+                        <td style="padding-right: 2rem;"><%=formatDate(saldata[i].recieve_date) %></td>
+                    </tr>
+                <% } %> 
+            </table>
+        </div>
+    </div>
+<%- include("partials/footer") %>
